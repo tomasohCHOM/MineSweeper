@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+:root {
+    --green: #00b159;
+    --orange: #f37735;
+    --red: #d11141;
+    --white: rgb(239, 239, 239);
+}
+
+body {
+    box-sizing: border-box;
+    background-color: #536872;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 36px;
+    text-align: center;
+}
+
+.option-select > button {
+    margin: 10px 5px;
+    padding: 5px 5px;
+    font-family: inherit;
+    font-size: 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.beginner-difficulty {
+    color: var(--green);
+    border: 2px solid var(--green);
+}
+
+.intermediate-difficulty {
+    color: var(--orange);
+    border: 2px solid var(--orange);
+}
+
+.expert-difficulty {
+    color: var(--red);
+    border: 2px solid var(--red);
+}
+
+.beginner-difficulty:hover {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.intermediate-difficulty:hover {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.expert-difficulty:hover {
+    background-color: var(--red);
+    color: var(--white);
+}
