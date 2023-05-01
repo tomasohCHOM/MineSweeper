@@ -24,6 +24,14 @@ body {
     text-align: center;
 }
 
+.title, .option-select {
+    flex: 1;
+}
+
+#grid {
+    flex: 3;
+}
+
 .option-select > button {
     margin: 10px 5px;
     padding: 5px 5px;
@@ -31,7 +39,7 @@ body {
     font-size: 20px;
     border-radius: 14px;
     cursor: pointer;
-    transition: all 0.1s;
+    transition: all 0.045s;
 }
 
 .beginner-difficulty {
