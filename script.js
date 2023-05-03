@@ -2,15 +2,22 @@ const grid = document.getElementById('grid');
 let lockGame = false;
 // Set test mode to true if you want to see the mines' locations
 const testMode = false;
-generateGrid();
+let rowDimensions = 9;
+let colDimensions = 9;
+let numberOfMines = 10;
+// generateGrid();
 
-// Generate a 10x10 grid
-function generateGrid() {
+// Generate a grid with given row and column dimensions, and the number of mines
+function generateGrid(rowDim, colDim, numMines) {
     lockGame = false;
     grid.innerHTML = '';
-    for (let r = 0; r < 10; r++) {
+    rowDimensions = rowDim;
+    colDimensions = colDim;
+    numberOfMines = numMines;
+
+    for (let r = 0; r < rowDim; r++) {
         row = grid.insertRow(r);
-        for (let c = 0; c < 10; c++) {
+        for (let c = 0; c < colDim; c++) {
             cell = row.insertCell(c);
             cell.onclick = function() { init(this); }
             let mine = document.createAttribute('mine');
@@ -18,15 +25,15 @@ function generateGrid() {
             cell.setAttributeNode(mine);
         }
     }
-    generateMines();
+    generateMines(rowDim, colDim, numMines);
 }
 
 // Generate random mines
-function generateMines() {
-    // Add 20 mines
-    for (let i = 0; i < 20; i++) {
-        let row = Math.floor(Math.random() * 10);
-        let col = Math.floor(Math.random() * 10);
+function generateMines(rowDim, colDim, mineNum) {
+    // Add the mines in a random order.
+    for (let i = 0; i < mineNum; i++) {
+        let row = Math.floor(Math.random() * rowDim);
+        let col = Math.floor(Math.random() * colDim);
         let cell = grid.rows[row].cells[col];
         cell.setAttribute('mine', 'true');
         if (testMode) {
@@ -37,8 +44,8 @@ function generateMines() {
 
 // Highlight all mines
 function revealMines() {
-    for (let r = 0; r < 10; r++) {
-        for (let c = 0; c < 10; c++) {
+    for (let r = 0; r < rowDimensions; r++) {
+        for (let c = 0; c < colDimensions; c++) {
             let cell = grid.rows[r].cells[c];
             if (cell.getAttribute('mine') == 'true') {
                 cell.className = 'mine';
@@ -49,8 +56,8 @@ function revealMines() {
 
 function checkGameComplete() {
     let gameComplete = true;
-    for (let r = 0; r < 10; r++) {
-        for (let c = 0; c < 10; c++) {
+    for (let r = 0; r < rowDimensions; r++) {
+        for (let c = 0; c < colDimensions; c++) {
             if ((grid.rows[r].cells[c].getAttribute('mine') == 'false') && (grid.rows[r].cells[c].innerHTML == '')) {
                 gameComplete = false;
             }
