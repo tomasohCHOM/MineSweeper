@@ -5,6 +5,8 @@
     --orange: #f37735;
     --red: #d11141;
     --white: rgb(239, 239, 239);
+    --light-gray: rgb(192, 192, 192);
+    --dark-gray: rgb(93, 93, 93);
 }
 
 body {
@@ -70,4 +72,25 @@ body {
 .expert-difficulty:hover {
     background-color: var(--red);
     color: var(--white);
+}
+
+#grid {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#grid tr td {
+    border: 1px solid var(--white);
+    background-color: var(--light-gray);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+
+#grid tr td.active {
+    background-color: var(--dark-gray);
+}
+
+#grid tr td.mine {
+    background-color: var(--red);
 }
