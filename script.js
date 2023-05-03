@@ -84,8 +84,8 @@ function init(cell) {
             let mineCount = 0;
             var cellRow = cell.parentNode.rowIndex;
             var cellCol = cell.cellIndex;
-            for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, 9); r++) {
-                for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, 9); c++) {
+            for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, rowDimensions - 1); r++) {
+                for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, colDimensions - 1); c++) {
                     if (grid.rows[r].cells[c].getAttribute('mine') == 'true') {
                         mineCount++;
                     }
@@ -94,8 +94,8 @@ function init(cell) {
             cell.innerHTML = mineCount;
             if (mineCount == 0) {
                 // If the cell doesn't have a mine
-                for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, 9); r++) {
-                    for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, 9); c++) {
+                for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, rowDimensions - 1); r++) {
+                    for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, colDimensions - 1); c++) {
                         if (grid.rows[r].cells[c].innerHTML == '') {
                             init(grid.rows[r].cells[c]);
                         }
