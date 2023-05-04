@@ -7,6 +7,7 @@
     --white: rgb(239, 239, 239);
     --light-gray: rgb(192, 192, 192);
     --dark-gray: rgb(93, 93, 93);
+    --darker-gray: rgb(39, 39, 39);
 }
 
 body {
@@ -28,6 +29,7 @@ body {
 
 #grid {  
     background-color: var(--white);
+    z-index: 0;
 }
 
 .option-select > button {
@@ -82,12 +84,36 @@ body {
     height: 20px;
     text-align: center;
     cursor: pointer;
+    z-index: 1;
+
+    animation-name: cellAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+    animation-delay: 0;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
 #grid tr td.active {
+    box-sizing: border-box;
     background-color: var(--dark-gray);
+    /* border: 1px solid var(--darker-gray); */
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 #grid tr td.mine {
     background-color: var(--red);
+}
+
+@keyframes cellAnimation {
+    0% {
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.0);
+    }
 }
