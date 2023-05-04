@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
     --green: #00b159;
@@ -80,6 +80,7 @@ body {
 #grid tr td {
     border: 1px solid var(--white);
     background-color: var(--light-gray);
+    font-family:'Bruno Ace SC', cursive;
     width: 20px;
     height: 20px;
     text-align: center;
