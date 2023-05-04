@@ -5,35 +5,39 @@ const testMode = false;
 let rowDimensions = 9;
 let colDimensions = 9;
 let numberOfMines = 10;
-// generateGrid();
+generateGrid();
 
-// Generate a grid with given row and column dimensions, and the number of mines
-function generateGrid(rowDim, colDim, numMines) {
-    lockGame = false;
-    grid.innerHTML = '';
+// Initialize game dimensions according to its difficulty
+function initGameDimensions(rowDim, colDim, numMines) {
     rowDimensions = rowDim;
     colDimensions = colDim;
-    numberOfMines = numMines;
+    numMines = numberOfMines;
+}
 
-    for (let r = 0; r < rowDim; r++) {
+// Generate a grid with given row and column dimensions, and the number of mines
+function generateGrid() {
+    lockGame = false;
+    grid.innerHTML = '';
+
+    for (let r = 0; r < rowDimensions; r++) {
         row = grid.insertRow(r);
-        for (let c = 0; c < colDim; c++) {
+        for (let c = 0; c < colDimensions; c++) {
             cell = row.insertCell(c);
-            cell.onclick = function() { init(this); }
+            cell.onclick = function() { initCell(this); }
             let mine = document.createAttribute('mine');
             mine.value = 'false';
             cell.setAttributeNode(mine);
         }
     }
-    generateMines(rowDim, colDim, numMines);
+    generateMines();
 }
 
 // Generate random mines
-function generateMines(rowDim, colDim, mineNum) {
+function generateMines() {
     // Add the mines in a random order.
-    for (let i = 0; i < mineNum; i++) {
-        let row = Math.floor(Math.random() * rowDim);
-        let col = Math.floor(Math.random() * colDim);
+    for (let i = 0; i < numberOfMines; i++) {
+        let row = Math.floor(Math.random() * rowDimensions);
+        let col = Math.floor(Math.random() * colDimensions);
         let cell = grid.rows[row].cells[col];
         cell.setAttribute('mine', 'true');
         if (testMode) {
@@ -47,7 +51,7 @@ function revealMines() {
     for (let r = 0; r < rowDimensions; r++) {
         for (let c = 0; c < colDimensions; c++) {
             let cell = grid.rows[r].cells[c];
-            if (cell.getAttribute('mine') == 'true') {
+            if (cell.getAttribute('mine') === 'true') {
                 cell.className = 'mine';
             }
         }
@@ -58,7 +62,7 @@ function checkGameComplete() {
     let gameComplete = true;
     for (let r = 0; r < rowDimensions; r++) {
         for (let c = 0; c < colDimensions; c++) {
-            if ((grid.rows[r].cells[c].getAttribute('mine') == 'false') && (grid.rows[r].cells[c].innerHTML == '')) {
+            if ((grid.rows[r].cells[c].getAttribute('mine') === 'false') && (grid.rows[r].cells[c].innerHTML === '')) {
                 gameComplete = false;
             }
         }
@@ -69,13 +73,13 @@ function checkGameComplete() {
     }
 }
 
-function init(cell) {
+function initCell(cell) {
     // Check if the game was completed or not
     if (lockGame) {
         return;
     } else {
         // Check if user clicked on mine
-        if (cell.getAttribute('mine') == 'true') {
+        if (cell.getAttribute('mine') === 'true') {
             revealMines();
             lockGame = true;
         } else {
@@ -86,18 +90,18 @@ function init(cell) {
             var cellCol = cell.cellIndex;
             for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, rowDimensions - 1); r++) {
                 for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, colDimensions - 1); c++) {
-                    if (grid.rows[r].cells[c].getAttribute('mine') == 'true') {
+                    if (grid.rows[r].cells[c].getAttribute('mine') === 'true') {
                         mineCount++;
                     }
                 }
             }
             cell.innerHTML = mineCount;
-            if (mineCount == 0) {
+            if (mineCount === 0) {
                 // If the cell doesn't have a mine
                 for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, rowDimensions - 1); r++) {
                     for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, colDimensions - 1); c++) {
-                        if (grid.rows[r].cells[c].innerHTML == '') {
-                            init(grid.rows[r].cells[c]);
+                        if (grid.rows[r].cells[c].innerHTML === '') {
+                            initCell(grid.rows[r].cells[c]);
                         }
                     }
                 }

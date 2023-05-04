@@ -10,9 +10,9 @@
 <body>
     <h1 class="title">MineSweeper</h1>
     <div class="option-select">
-        <button onclick="generateGrid(9, 9, 10)" class="beginner-difficulty">Beginner: 9x9 10 Mines</button>
-        <button onclick="generateGrid(16, 16, 40)" class="intermediate-difficulty">Intermediate: 16x16 40 Mines</button>
-        <button onclick="generateGrid(16, 30, 99)" class="expert-difficulty">Expert: 16x30 99 Mines</button>
+        <button onclick="initGameDimensions(9, 9, 10)" class="beginner-difficulty">Beginner: 9x9 10 Mines</button>
+        <button onclick="initGameDimensions(16, 16, 40)" class="intermediate-difficulty">Intermediate: 16x16 40 Mines</button>
+        <button onclick="initGameDimensions(16, 30, 99)" class="expert-difficulty">Expert: 16x30 99 Mines</button>
     </div>
     <table id="grid"></table>
     <script src="script.js"></script>
