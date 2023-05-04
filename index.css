@@ -26,12 +26,7 @@ body {
     text-align: center;
 }
 
-.title, .option-select {
-    flex: 1;
-}
-
-#grid {
-    flex: 3;
+#grid {  
     background-color: var(--white);
 }
 

@@ -11,7 +11,7 @@ generateGrid();
 function initGame(rowDim, colDim, numMines) {
     rowDimensions = rowDim;
     colDimensions = colDim;
-    numMines = numberOfMines;
+    numberOfMines = numMines;
     generateGrid();
 }
 
