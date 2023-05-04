@@ -42,32 +42,39 @@ body {
     transition: all 0.045s;
 }
 
-.beginner-difficulty {
+.beginner-difficulty,
+.intermediate-difficulty,
+.expert-difficulty {
+    color: var(--dark-gray);
+    border: 2px solid var(--dark-gray);
+}
+
+.beginner-difficulty:hover {
     color: var(--green);
     border: 2px solid var(--green);
 }
 
-.intermediate-difficulty {
+.intermediate-difficulty:hover {
     color: var(--orange);
     border: 2px solid var(--orange);
 }
 
-.expert-difficulty {
+.expert-difficulty:hover {
     color: var(--red);
     border: 2px solid var(--red);
 }
 
-.beginner-difficulty:hover {
+.beginner-difficulty:active {
     background-color: var(--green);
     color: var(--white);
 }
 
-.intermediate-difficulty:hover {
+.intermediate-difficulty:active {
     background-color: var(--orange);
     color: var(--white);
 }
 
-.expert-difficulty:hover {
+.expert-difficulty:active {
     background-color: var(--red);
     color: var(--white);
 }
