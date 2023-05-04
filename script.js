@@ -8,10 +8,11 @@ let numberOfMines = 10;
 generateGrid();
 
 // Initialize game dimensions according to its difficulty
-function initGameDimensions(rowDim, colDim, numMines) {
+function initGame(rowDim, colDim, numMines) {
     rowDimensions = rowDim;
     colDimensions = colDim;
     numMines = numberOfMines;
+    generateGrid();
 }
 
 // Generate a grid with given row and column dimensions, and the number of mines
