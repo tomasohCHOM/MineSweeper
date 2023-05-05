@@ -2,6 +2,7 @@ const grid = document.getElementById('grid');
 let lockGame = false;
 // Set test mode to true if you want to see the mines' locations
 const testMode = false;
+// Initialize the dimensions and number of mines to Beginner Difficulty for now and render the grid
 let rowDimensions = 9;
 let colDimensions = 9;
 let numberOfMines = 10;
@@ -37,10 +38,21 @@ function generateGrid() {
 function generateMines() {
     // Add the mines in a random order.
     for (let i = 0; i < numberOfMines; i++) {
-        let row = Math.floor(Math.random() * rowDimensions);
-        let col = Math.floor(Math.random() * colDimensions);
-        let cell = grid.rows[row].cells[col];
+        // let row = Math.floor(Math.random() * rowDimensions);
+        // let col = Math.floor(Math.random() * colDimensions);
+        // let cell = grid.rows[row].cells[col];
+        // cell.setAttribute('mine', 'true');
+        
+        // This is to make sure that some mines aren't "eaten up" by RNG.
+        let cell;
+        do {
+            let row = Math.floor(Math.random() * rowDimensions);
+            let col = Math.floor(Math.random() * colDimensions);
+            cell = grid.rows[row].cells[col];
+
+        } while (cell.getAttribute('mine') === 'true')
         cell.setAttribute('mine', 'true');
+
         if (testMode) {
             cell.innerHTML = 'X';
         }
