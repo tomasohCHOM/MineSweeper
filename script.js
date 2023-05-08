@@ -8,7 +8,7 @@ const gameOverMessage = document.createElement('div');
 gameOverMessage.className = 'game-over-message';
 
 let lockGame = false;
-const testMode = true; // Set test mode to true if you want to see the mines' locations
+let testMode = false; // Set test mode to true if you want to see the mines' locations
 
 // Initialize the dimensions and number of mines to Intermediate Difficulty for now and render the grid
 let rowDimensions = 16;
@@ -16,11 +16,21 @@ let colDimensions = 16;
 let numberOfMines = 40;
 generateGrid();
 
+// Event Listeners
 const optionSelect = document.getElementById('option-select');
 optionSelect.addEventListener('click', function(e) {
     const difficulty = e.target.id.replace('-difficulty', '');
     const dimensions = difficultyTable[difficulty];
     initGame(dimensions.rows, dimensions.columns, dimensions.mines);
+}, false);
+
+let testModeCheckbox = document.querySelector("input[id=test-mode-checkbox]");
+testModeCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        testMode = true;
+    } else {
+        testMode = false;
+    }
 }, false);
 
 // Initialize game dimensions according to its difficulty
