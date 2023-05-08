@@ -1,12 +1,25 @@
 const grid = document.getElementById('grid');
-let lockGame = false;
-// Set test mode to true if you want to see the mines' locations
+const difficultyTable = {
+    'beginner': {rows: 9, columns: 9, mines: 10},
+    'intermediate': {rows: 16, columns: 16, mines: 40},
+    'expert': {rows: 16, columns: 30, mines: 99}
+}
+
+let lockGame = false; // Set test mode to true if you want to see the mines' locations
 const testMode = false;
-// Initialize the dimensions and number of mines to Beginner Difficulty for now and render the grid
-let rowDimensions = 9;
-let colDimensions = 9;
-let numberOfMines = 10;
+
+// Initialize the dimensions and number of mines to Intermediate Difficulty for now and render the grid
+let rowDimensions = 16;
+let colDimensions = 16;
+let numberOfMines = 40;
 generateGrid();
+
+const optionSelect = document.getElementById('option-select');
+optionSelect.addEventListener('click', function(e) {
+    const difficulty = e.target.id.replace('-difficulty', '');
+    const dimensions = difficultyTable[difficulty];
+    initGame(dimensions.rows, dimensions.columns, dimensions.mines);
+}, false);
 
 // Initialize game dimensions according to its difficulty
 function initGame(rowDim, colDim, numMines) {
