@@ -26,11 +26,7 @@ optionSelect.addEventListener('click', function(e) {
 
 let testModeCheckbox = document.querySelector("input[id=test-mode-checkbox]");
 testModeCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        testMode = true;
-    } else {
-        testMode = false;
-    }
+    testMode = (this.checked) ? true : false;
 }, false);
 
 // Initialize game dimensions according to its difficulty
