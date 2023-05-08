@@ -6,7 +6,7 @@ const difficultyTable = {
 }
 
 let lockGame = false; // Set test mode to true if you want to see the mines' locations
-const testMode = false;
+const testMode = true;
 
 // Initialize the dimensions and number of mines to Intermediate Difficulty for now and render the grid
 let rowDimensions = 16;
@@ -51,11 +51,6 @@ function generateGrid() {
 function generateMines() {
     // Add the mines in a random order.
     for (let i = 0; i < numberOfMines; i++) {
-        // let row = Math.floor(Math.random() * rowDimensions);
-        // let col = Math.floor(Math.random() * colDimensions);
-        // let cell = grid.rows[row].cells[col];
-        // cell.setAttribute('mine', 'true');
-        
         // This is to make sure that some mines aren't "eaten up" by RNG.
         let cell;
         do {
@@ -95,6 +90,10 @@ function checkGameComplete() {
     }
     if (gameComplete) {
         alert("You found all the mines!");
+        let gameCompleteMessage = document.createElement('div');
+        gameCompleteMessage.innerHTML = 'You found all the mines! Nice!';
+        gameCompleteMessage.className = 'game-over-message';
+        document.appendChild(gameCompleteMessage);
         revealMines();
     }
 }
