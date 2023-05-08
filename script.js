@@ -4,9 +4,11 @@ const difficultyTable = {
     'intermediate': {rows: 16, columns: 16, mines: 40},
     'expert': {rows: 16, columns: 30, mines: 99}
 }
+const gameOverMessage = document.createElement('div');
+gameOverMessage.className = 'game-over-message';
 
-let lockGame = false; // Set test mode to true if you want to see the mines' locations
-const testMode = true;
+let lockGame = false;
+const testMode = true; // Set test mode to true if you want to see the mines' locations
 
 // Initialize the dimensions and number of mines to Intermediate Difficulty for now and render the grid
 let rowDimensions = 16;
@@ -23,6 +25,7 @@ optionSelect.addEventListener('click', function(e) {
 
 // Initialize game dimensions according to its difficulty
 function initGame(rowDim, colDim, numMines) {
+    gameOverMessage.innerHTML = '';
     rowDimensions = rowDim;
     colDimensions = colDim;
     numberOfMines = numMines;
@@ -89,11 +92,8 @@ function checkGameComplete() {
         }
     }
     if (gameComplete) {
-        alert("You found all the mines!");
-        let gameCompleteMessage = document.createElement('div');
-        gameCompleteMessage.innerHTML = 'You found all the mines! Nice!';
-        gameCompleteMessage.className = 'game-over-message';
-        document.appendChild(gameCompleteMessage);
+        gameOverMessage.innerHTML = 'You found all the mines! Nice!';
+        document.body.appendChild(gameOverMessage);
         revealMines();
     }
 }
@@ -105,6 +105,8 @@ function initCell(cell) {
     } else {
         // Check if user clicked on mine
         if (cell.getAttribute('mine') === 'true') {
+            gameOverMessage.innerHTML = 'You stepped on a mine. GG Go Next.';
+            document.body.appendChild(gameOverMessage);
             revealMines();
             lockGame = true;
         } else {
