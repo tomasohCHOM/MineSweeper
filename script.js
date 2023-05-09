@@ -134,6 +134,10 @@ function initCell(cell) {
             revealMines();
             lockGame = true;
         } else {
+            if (cell.className === 'flag') {
+                bombCount += 1;
+                flagCount.innerText = `Flag Count: ${bombCount}`;
+            }
             cell.className = 'active';
             // Display the number of mines around the cell
             let mineCount = 0;
