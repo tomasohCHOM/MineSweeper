@@ -168,7 +168,9 @@ function markCell(cell) {
     const cellCol = cell.cellIndex;
     let currentCell = grid.rows[cellRow].cells[cellCol];
     
-    if (currentCell.className === 'flag') {
+    if (currentCell.className === 'active') {
+        return;
+    } else if (currentCell.className === 'flag') {
         currentCell.className = '';
         bombCount += 1;
     } else {
