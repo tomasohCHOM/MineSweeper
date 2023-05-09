@@ -27,6 +27,7 @@ optionSelect.addEventListener('click', function(e) {
 let testModeCheckbox = document.querySelector("input[id=test-mode-checkbox]");
 testModeCheckbox.addEventListener('change', function() {
     testMode = (this.checked) ? true : false;
+    testModeMines();
 }, false);
 
 // Initialize game dimensions according to its difficulty
@@ -70,9 +71,9 @@ function generateMines() {
         } while (cell.getAttribute('mine') === 'true')
         cell.setAttribute('mine', 'true');
 
-        if (testMode) {
-            cell.innerHTML = 'X';
-        }
+        // if (testMode) {
+        //     cell.innerHTML = 'X';
+        // }
     }
 }
 
@@ -83,6 +84,19 @@ function revealMines() {
             let cell = grid.rows[r].cells[c];
             if (cell.getAttribute('mine') === 'true') {
                 cell.className = 'mine';
+            }
+        }
+    }
+}
+
+function testModeMines() {
+    for (let r = 0; r < rowDimensions; r++) {
+        for (let c = 0; c < colDimensions; c++) {
+            let cell = grid.rows[r].cells[c];
+            if (testMode && cell.getAttribute('mine') === 'true') {
+                cell.innerHTML = 'X';
+            } else if (!testMode && cell.getAttribute('mine') === 'true') {
+                cell.innerHTML = '';
             }
         }
     }
