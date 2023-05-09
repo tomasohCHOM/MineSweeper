@@ -6,6 +6,7 @@ const difficultyTable = {
 }
 const gameOverMessage = document.createElement('div');
 gameOverMessage.className = 'game-over-message';
+const flagCount = document.getElementById('flag-count');
 
 let lockGame = false;
 let testMode = false; // Set test mode to true if you want to see the mines' locations
@@ -14,6 +15,7 @@ let testMode = false; // Set test mode to true if you want to see the mines' loc
 let rowDimensions = 16;
 let colDimensions = 16;
 let numberOfMines = 40;
+let bombCount = numberOfMines;
 generateGrid();
 
 // Event Listeners
@@ -36,6 +38,8 @@ function initGame(rowDim, colDim, numMines) {
     rowDimensions = rowDim;
     colDimensions = colDim;
     numberOfMines = numMines;
+    bombCount = numberOfMines;
+    flagCount.innerText = `Flag Count: ${bombCount}`;
     generateGrid();
 }
 
@@ -49,6 +53,10 @@ function generateGrid() {
         for (let c = 0; c < colDimensions; c++) {
             cell = row.insertCell(c);
             cell.onclick = function() { initCell(this); }
+            cell.oncontextmenu = function() { 
+                markCell(this);
+                return false;
+            }
             let mine = document.createAttribute('mine');
             mine.value = 'false';
             cell.setAttributeNode(mine);
@@ -70,10 +78,6 @@ function generateMines() {
 
         } while (cell.getAttribute('mine') === 'true')
         cell.setAttribute('mine', 'true');
-
-        // if (testMode) {
-        //     cell.innerHTML = 'X';
-        // }
     }
 }
 
@@ -133,8 +137,8 @@ function initCell(cell) {
             cell.className = 'active';
             // Display the number of mines around the cell
             let mineCount = 0;
-            var cellRow = cell.parentNode.rowIndex;
-            var cellCol = cell.cellIndex;
+            let cellRow = cell.parentNode.rowIndex;
+            let cellCol = cell.cellIndex;
             for (let r = Math.max(cellRow - 1, 0); r <= Math.min(cellRow + 1, rowDimensions - 1); r++) {
                 for (let c = Math.max(cellCol - 1, 0); c <= Math.min(cellCol + 1, colDimensions - 1); c++) {
                     if (grid.rows[r].cells[c].getAttribute('mine') === 'true') {
@@ -157,4 +161,19 @@ function initCell(cell) {
         }
     }
 
+}
+
+function markCell(cell) {
+    const cellRow = cell.parentNode.rowIndex;
+    const cellCol = cell.cellIndex;
+    let currentCell = grid.rows[cellRow].cells[cellCol];
+    
+    if (currentCell.className === 'flag') {
+        currentCell.className = '';
+        bombCount += 1;
+    } else {
+        currentCell.className = 'flag';
+        bombCount -= 1;
+    }
+    flagCount.innerText = `Flag Count: ${bombCount}`;
 }

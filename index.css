@@ -139,6 +139,10 @@ body {
     background-color: var(--red);
 }
 
+#grid tr td.flag {
+    background-color: var(--orange);
+}
+
 @keyframes cellAnimation {
     0% {
         transform: scale(0.3);
