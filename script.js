@@ -52,11 +52,14 @@ function generateGrid() {
         row = grid.insertRow(r);
         for (let c = 0; c < colDimensions; c++) {
             cell = row.insertCell(c);
-            cell.onclick = function() { initCell(this); }
-            cell.oncontextmenu = function() { 
+            cell.addEventListener('click', function() {
+                initCell(this);
+            }, false);
+            cell.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
                 markCell(this);
                 return false;
-            }
+            }, false);
             let mine = document.createAttribute('mine');
             mine.value = 'false';
             cell.setAttributeNode(mine);
