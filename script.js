@@ -197,12 +197,12 @@ function markCell(cell) {
     
     if (cell.className === 'active') {
         return;
-    } else if (cell.className === 'flag') {
-        cell.className = '';
+    } else if (cell.getAttribute('flagged') === 'true') {
+        cell.setAttribute('flagged', 'false');
         cell.innerHTML = (testMode && cell.getAttribute('mine') === 'true') ? 'X' : '';
         bombCount += 1;
     } else {
-        cell.className = 'flag';
+        cell.setAttribute('flagged', 'true');
         cell.innerHTML = `<img src="images/flag.png">`;
         bombCount -= 1;
     }

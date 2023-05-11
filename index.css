@@ -116,6 +116,7 @@ body {
     width: 20px;
     height: 20px;
     text-align: center;
+    vertical-align: middle;
     cursor: pointer;
     z-index: 1;
 
@@ -140,10 +141,10 @@ body {
 }
 
 #grid tr td.flag {
-    display: flex;
+    /* display: flex;
     align-items: center;
     justify-content: center;
-    /* overflow: hidden; */
+    overflow: hidden; */
 }
 
 #grid tr td > img {
