@@ -140,13 +140,6 @@ body {
     background-color: var(--red);
 }
 
-#grid tr td.flag {
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; */
-}
-
 #grid tr td > img {
     overflow: hidden;
     max-width: 80%;
