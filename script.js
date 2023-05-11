@@ -60,9 +60,7 @@ function generateGrid() {
                 markCell(this);
                 return false;
             }, false);
-            let mine = document.createAttribute('mine');
-            mine.value = 'false';
-            cell.setAttributeNode(mine);
+            createCellAttributes(cell);
         }
     }
     generateMines();
@@ -81,6 +79,7 @@ function generateMines() {
 
         } while (cell.getAttribute('mine') === 'true')
         cell.setAttribute('mine', 'true');
+        if (testMode) cell.innerHTML = 'X';
     }
 }
 
@@ -89,8 +88,8 @@ function revealMines() {
     for (let r = 0; r < rowDimensions; r++) {
         for (let c = 0; c < colDimensions; c++) {
             let cell = grid.rows[r].cells[c];
-            if (cell.getAttribute('mine') === 'true') {
-                cell.className = 'mine';
+            if (cell.getAttribute('mine') === 'true' && cell.getAttribute('triggered') === 'false') {
+                // cell.className = 'mine';
                 cell.innerHTML = `<img src="images/bomb.png">`;
             }
         }
@@ -98,6 +97,7 @@ function revealMines() {
 }
 
 function testModeMines() {
+    if (lockGame) return;
     for (let r = 0; r < rowDimensions; r++) {
         for (let c = 0; c < colDimensions; c++) {
             let cell = grid.rows[r].cells[c];
@@ -133,7 +133,9 @@ function initCell(cell) {
     else {
         // Check if user clicked on mine
         if (cell.getAttribute('mine') === 'true') {
-            cell.innerHTML = `<img src="images/explosion.png"`;
+            cell.setAttribute('triggered', 'true');
+            cell.className = 'mine';
+            cell.innerHTML = `<img src="images/explosion.png">`;
             gameOverMessage.innerHTML = 'You stepped on a mine. GG Go Next.';
             document.body.appendChild(gameOverMessage);
             revealMines();
@@ -170,6 +172,20 @@ function initCell(cell) {
         }
     }
 
+}
+
+function createCellAttributes(cell) {
+    let mine = document.createAttribute('mine');
+    mine.value = 'false';
+    cell.setAttributeNode(mine);
+
+    let triggered = document.createAttribute('triggered');
+    triggered.value = 'false';
+    cell.setAttributeNode(triggered);
+
+    let flagged = document.createAttribute('flagged');
+    flagged.value = 'false';
+    cell.setAttributeNode(flagged);
 }
 
 function markCell(cell) {
