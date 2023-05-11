@@ -140,7 +140,15 @@ body {
 }
 
 #grid tr td.flag {
-    background-color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#grid tr td > img {
+    overflow: hidden;
+    max-width: 80%;
+    max-height: 80%;
 }
 
 @keyframes cellAnimation {

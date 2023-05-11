@@ -91,6 +91,7 @@ function revealMines() {
             let cell = grid.rows[r].cells[c];
             if (cell.getAttribute('mine') === 'true') {
                 cell.className = 'mine';
+                cell.innerHTML = `<img src="images/bomb.png">`;
             }
         }
     }
@@ -127,11 +128,12 @@ function checkGameComplete() {
 
 function initCell(cell) {
     // Check if the game was completed or not
-    if (lockGame) {
-        return;
-    } else {
+    if (lockGame) return;
+    // Otherwise
+    else {
         // Check if user clicked on mine
         if (cell.getAttribute('mine') === 'true') {
+            cell.innerHTML = `<img src="images/explosion.png"`;
             gameOverMessage.innerHTML = 'You stepped on a mine. GG Go Next.';
             document.body.appendChild(gameOverMessage);
             revealMines();
@@ -171,6 +173,8 @@ function initCell(cell) {
 }
 
 function markCell(cell) {
+    if (lockGame) return;
+
     const cellRow = cell.parentNode.rowIndex;
     const cellCol = cell.cellIndex;
     let currentCell = grid.rows[cellRow].cells[cellCol];
@@ -179,9 +183,11 @@ function markCell(cell) {
         return;
     } else if (currentCell.className === 'flag') {
         currentCell.className = '';
+        currentCell.innerHTML = '';
         bombCount += 1;
     } else {
         currentCell.className = 'flag';
+        currentCell.innerHTML = `<img src="images/flag.png">`;
         bombCount -= 1;
     }
     flagCount.innerText = `Flag Count: ${bombCount}`;
