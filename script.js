@@ -191,19 +191,19 @@ function createCellAttributes(cell) {
 function markCell(cell) {
     if (lockGame) return;
 
-    const cellRow = cell.parentNode.rowIndex;
-    const cellCol = cell.cellIndex;
-    let currentCell = grid.rows[cellRow].cells[cellCol];
+    // const cellRow = cell.parentNode.rowIndex;
+    // const cellCol = cell.cellIndex;
+    // let currentCell = grid.rows[cellRow].cells[cellCol];
     
-    if (currentCell.className === 'active') {
+    if (cell.className === 'active') {
         return;
-    } else if (currentCell.className === 'flag') {
-        currentCell.className = '';
-        currentCell.innerHTML = '';
+    } else if (cell.className === 'flag') {
+        cell.className = '';
+        cell.innerHTML = (testMode && cell.getAttribute('mine') === 'true') ? 'X' : '';
         bombCount += 1;
     } else {
-        currentCell.className = 'flag';
-        currentCell.innerHTML = `<img src="images/flag.png">`;
+        cell.className = 'flag';
+        cell.innerHTML = `<img src="images/flag.png">`;
         bombCount -= 1;
     }
     flagCount.innerText = `Flag Count: ${bombCount}`;
