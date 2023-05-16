@@ -141,7 +141,7 @@ function initCell(cell) {
             revealMines();
             lockGame = true;
         } else {
-            if (cell.className === 'flag') {
+            if (cell.getAttribute('flagged') === 'true') {
                 bombCount += 1;
                 flagCount.innerText = `Flag Count: ${bombCount}`;
             }
